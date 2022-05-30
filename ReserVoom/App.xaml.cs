@@ -35,7 +35,7 @@ namespace ReserVoom
                     new DateTime(2000, 1, 2)
                 ));
 
-                var reservations = hotel.GetReservationsForUser("Kuntal Das");
+                var reservations = hotel.GetReservationsForUser();
             }
             catch (ReservationConflictException ex)
             {
