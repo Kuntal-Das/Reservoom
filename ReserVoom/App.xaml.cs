@@ -1,5 +1,6 @@
 ﻿using Exceptions;
 using Models;
+using ReserVoom.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,30 +18,11 @@ namespace ReserVoom
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            Hotel hotel = new Hotel("Golden Eve");
-
-            try
+            MainWindow = new MainWindow()
             {
-                hotel.MakeReservation(new Reservation(
-                    "Kuntal Das",
-                    new RoomID(1, 2),
-                    new DateTime(2000, 1, 1),
-                    new DateTime(2000, 1, 2)
-                ));
-
-                hotel.MakeReservation(new Reservation(
-                    "Kuntal Das",
-                    new RoomID(1, 3),
-                    new DateTime(2000, 1, 1),
-                    new DateTime(2000, 1, 2)
-                ));
-
-                var reservations = hotel.GetReservationsForUser();
-            }
-            catch (ReservationConflictException ex)
-            {
-
-            }
+                DataContext = new MainViewModel()
+            };
+            MainWindow.Show();
 
             base.OnStartup(e);
         }
