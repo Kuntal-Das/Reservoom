@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReserVoom.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -73,15 +74,15 @@ namespace ReserVoom.ViewModels
         public ICommand SubmitCommand { get; }
         public ICommand CancelCommand { get; }
 
-        public MakeReservationViewModel()
+        public MakeReservationViewModel(Models.Hotel hotel)
         {
             UserName = string.Empty;
             RoomNumber = 0;
             FloorNumber = 0;
             StartDate = DateTime.Today;
             EndDate = DateTime.Today;
-            //SubmitCommand = ;
-            //CancelCommand = ;
+            SubmitCommand = new SubmitReservationCommand(this,hotel) ;
+            CancelCommand = new CancelMakeReservationCommand();
         }
     }
 }

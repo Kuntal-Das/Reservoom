@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReserVoom.Commands;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -18,7 +19,9 @@ namespace ReserVoom.ViewModels
 
         public ReservationListViewModel()
         {
+            MakeReservationCommand = new MakeReservationCommand();
             _reservations = new ObservableCollection<ReservationViewModel>();
+
 
             _reservations.Add(new ReservationViewModel(new Models.Reservation("Kuntal", new Models.RoomID(1, 2), DateTime.Now, DateTime.Now)));
             _reservations.Add(new ReservationViewModel(new Models.Reservation("Bishal", new Models.RoomID(1, 3), DateTime.Now, DateTime.Now)));

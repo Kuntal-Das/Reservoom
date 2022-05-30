@@ -9,6 +9,7 @@
         Title="ReserVoom" 
         Height="450" Width="800">
     <Grid>
-        <views:ReservationListView DataContext="{Binding CurrentViewModel}"/>
+        <!--<views:ReservationListView DataContext="{Binding CurrentViewModel}"/>-->
+        <views:MakeReservationView DataContext="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

@@ -10,9 +10,10 @@ namespace ReserVoom.ViewModels
     {
         public ViewModelBase CurrentViewModel { get; }
 
-        public MainViewModel()
+        public MainViewModel(Models.Hotel hotel)
         {
-            CurrentViewModel = new ReservationListViewModel();
+            //CurrentViewModel = new ReservationListViewModel();
+            CurrentViewModel = new MakeReservationViewModel(hotel);
         }
     }
 }
