@@ -4,9 +4,20 @@ namespace Models
 {
     public class RoomID
     {
+        /// <summary>
+        /// Floor Number of the RoomID
+        /// </summary>
         public int FloorNumber { get; }
+        /// <summary>
+        /// RoomNumber of the RoomID
+        /// </summary>
         public int RoomNumber { get; }
 
+        /// <summary>
+        /// Create RoomID object
+        /// </summary>
+        /// <param name="floorNumber"></param>
+        /// <param name="roomNumber"></param>
         public RoomID(int floorNumber, int roomNumber)
         {
             FloorNumber = floorNumber;

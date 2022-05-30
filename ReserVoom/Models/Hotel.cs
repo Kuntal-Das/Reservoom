@@ -7,21 +7,24 @@ namespace Models
         private readonly ReservationBook _reservationBook;
 
         public string Name { get; }
-
+        /// <summary>
+        /// Create Hotel Object
+        /// </summary>
+        /// <param name="name">Name of the Hotel</param>
         public Hotel(string name)
         {
             _reservationBook = new();
             Name = name;
         }
 
+
         /// <summary>
-        /// Get the reservation for a User
+        /// Gets all reservations
         /// </summary>
-        /// <param name="userName"> The UserName of the User. </param>
-        /// <returns> The Reservation for the user. </returns> 
-        public IEnumerable<Reservation> GetReservationsForUser(string userName)
+        /// <returns>All the Reservations for the hotel</returns>
+        public IEnumerable<Reservation> GetReservationsForUser()
         {
-            return _reservationBook.GetReservationsForUser(userName);
+            return _reservationBook.GetAllReservations();
         }
 
         /// <summary>
