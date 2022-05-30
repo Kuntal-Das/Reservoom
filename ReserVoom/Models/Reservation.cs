@@ -15,15 +15,15 @@ namespace Models
         /// <summary>
         /// Start Date of the reservation
         /// </summary>
-        public DateTime StartTime { get; }
+        public DateTime StartDate { get; }
         /// <summary>
         /// End Date of the reservation
         /// </summary>
-        public DateTime EndTime { get; }
+        public DateTime EndDate { get; }
         /// <summary>
         /// Total time reserved
         /// </summary>
-        public TimeSpan Length => EndTime - StartTime;
+        public TimeSpan Length => EndDate - StartDate;
 
         /// <summary>
         /// Create Reservation Object
@@ -36,8 +36,8 @@ namespace Models
         {
             UserName = userName;
             RoomID = roomID;
-            StartTime = startDate;
-            EndTime = endTime;
+            StartDate = startDate;
+            EndDate = endTime;
         }
         /// <summary>
         /// Does current reservation is conflicting with the passed in reservations
@@ -48,11 +48,11 @@ namespace Models
         {
             if (RoomID != reservation.RoomID) return false;
 
-            if (StartTime <= reservation.StartTime && EndTime >= reservation.StartTime)
+            if (StartDate <= reservation.StartDate && EndDate >= reservation.StartDate)
             {
                 return true;
             }
-            else if (StartTime <= reservation.EndTime && EndTime >= reservation.EndTime)
+            else if (StartDate <= reservation.EndDate && EndDate >= reservation.EndDate)
             {
                 return true;
             }
