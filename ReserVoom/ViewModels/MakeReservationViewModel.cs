@@ -77,7 +77,7 @@ namespace ReserVoom.ViewModels
         public ICommand CancelCommand { get; }
 
         //public MakeReservationViewModel(Models.Hotel hotel, NavigationStore<ViewModelBase> navigationStore)
-        public MakeReservationViewModel(Models.Hotel hotel, NavigationStore<ViewModelBase> navigationStore)
+        public MakeReservationViewModel(Models.Hotel hotel, NavigationService<ViewModelBase> navigateToReservationListService)
         {
             UserName = string.Empty;
             RoomNumber = 0;
@@ -85,12 +85,12 @@ namespace ReserVoom.ViewModels
             StartDate = DateTime.Today;
             EndDate = DateTime.Today;
 
-            NavigationService<ViewModelBase> ReservationListNavigationService =
-                new NavigationService<ViewModelBase>(navigationStore, () => new ReservationListViewModel(hotel, navigationStore));
+            //NavigationService<ViewModelBase> ReservationListNavigationService =
+            //    new NavigationService<ViewModelBase>(navigationStore, () => new ReservationListViewModel(hotel, navigationStore));
 
-            SubmitCommand = new SubmitReservationCommand(this, hotel, ReservationListNavigationService);
+            SubmitCommand = new SubmitReservationCommand(this, hotel, navigateToReservationListService);
 
-            CancelCommand = new NavigateCommand(ReservationListNavigationService);
+            CancelCommand = new NavigateCommand(navigateToReservationListService);
         }
     }
 }

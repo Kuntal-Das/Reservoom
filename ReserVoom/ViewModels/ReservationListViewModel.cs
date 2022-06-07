@@ -20,15 +20,15 @@ namespace ReserVoom.ViewModels
 
         public IEnumerable<ReservationViewModel> Reservations => _reservations;
 
-        public ReservationListViewModel(Models.Hotel hotel, Stores.NavigationStore<ViewModelBase> navigationStore)
+        public ReservationListViewModel(Hotel hotel, NavigationService<ViewModelBase> navigateToMakeReservationService)
         {
             _hotel = hotel;
             _reservations = new ObservableCollection<ReservationViewModel>();
 
-            NavigationService<ViewModelBase> makeReservationNavigationService =
-                new NavigationService<ViewModelBase>(navigationStore, () => new MakeReservationViewModel(hotel, navigationStore));
+            //NavigationService<ViewModelBase> makeReservationNavigationService =
+            //    new NavigationService<ViewModelBase>(navigationStore, () => new MakeReservationViewModel(hotel, navigationStore));
 
-            MakeReservationCommand = new NavigateCommand(makeReservationNavigationService);
+            MakeReservationCommand = new NavigateCommand(navigateToMakeReservationService);
 
             UpdateReservationList();
         }
