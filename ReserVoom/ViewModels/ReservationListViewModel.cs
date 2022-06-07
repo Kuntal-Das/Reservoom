@@ -1,4 +1,6 @@
-﻿using ReserVoom.Commands;
+﻿using Models;
+using ReserVoom.Commands;
+using ReserVoom.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,20 +15,31 @@ namespace ReserVoom.ViewModels
     {
         public ICommand MakeReservationCommand { get; }
 
+        private readonly Hotel _hotel;
         private readonly ObservableCollection<ReservationViewModel> _reservations;
 
         public IEnumerable<ReservationViewModel> Reservations => _reservations;
 
-        public ReservationListViewModel()
+        public ReservationListViewModel(Models.Hotel hotel, Stores.NavigationStore<ViewModelBase> navigationStore)
         {
-            MakeReservationCommand = new MakeReservationCommand();
+            _hotel = hotel;
             _reservations = new ObservableCollection<ReservationViewModel>();
 
+            NavigationService<ViewModelBase> makeReservationNavigationService =
+                new NavigationService<ViewModelBase>(navigationStore, () => new MakeReservationViewModel(hotel, navigationStore));
 
-            _reservations.Add(new ReservationViewModel(new Models.Reservation("Kuntal", new Models.RoomID(1, 2), DateTime.Now, DateTime.Now)));
-            _reservations.Add(new ReservationViewModel(new Models.Reservation("Bishal", new Models.RoomID(1, 3), DateTime.Now, DateTime.Now)));
-            _reservations.Add(new ReservationViewModel(new Models.Reservation("Ammbika", new Models.RoomID(3, 5), DateTime.Now, DateTime.Now)));
-            _reservations.Add(new ReservationViewModel(new Models.Reservation("Swagoto", new Models.RoomID(2, 2), DateTime.Now, DateTime.Now)));
+            MakeReservationCommand = new NavigateCommand(makeReservationNavigationService);
+
+            UpdateReservationList();
+        }
+
+        private void UpdateReservationList()
+        {
+            var reservations = _hotel.GetAllReservations();
+            foreach (var item in reservations)
+            {
+                _reservations.Add(new ReservationViewModel(item));
+            }
         }
     }
 }

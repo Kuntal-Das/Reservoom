@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReserVoom.Stores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,19 @@ namespace ReserVoom.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public ViewModelBase CurrentViewModel { get; }
+        private NavigationStore<ViewModelBase> _navigationStore;
 
-        public MainViewModel(Models.Hotel hotel)
+        public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
+
+        public MainViewModel(NavigationStore<ViewModelBase> navigationStore)
         {
-            //CurrentViewModel = new ReservationListViewModel();
-            CurrentViewModel = new MakeReservationViewModel(hotel);
+            _navigationStore = navigationStore;
+            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         }
-    }
+
+        private void OnCurrentViewModelChanged()
+        {
+            OnPropertyChanged(nameof(CurrentViewModel));
+        }
+    } 
 }
