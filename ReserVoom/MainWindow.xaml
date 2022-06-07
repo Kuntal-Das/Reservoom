@@ -3,13 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ReserVoom" xmlns:views="clr-namespace:ReserVoom.Views"
+        xmlns:local="clr-namespace:ReserVoom" 
+        xmlns:views="clr-namespace:ReserVoom.Views"
+        xmlns:vms="clr-namespace:ReserVoom.ViewModels"
         mc:Ignorable="d"
         FontSize="16"
         Title="ReserVoom" 
         Height="450" Width="800">
     <Grid>
-        <!--<views:ReservationListView DataContext="{Binding CurrentViewModel}"/>-->
-        <views:MakeReservationView DataContext="{Binding CurrentViewModel}"/>
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type vms:MakeReservationViewModel}">
+                <views:MakeReservationView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:ReservationListViewModel}">
+                <views:ReservationListView/>
+            </DataTemplate>
+        </Grid.Resources>
+        <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>
