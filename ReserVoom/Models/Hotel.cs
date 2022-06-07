@@ -22,7 +22,7 @@ namespace Models
         /// Gets all reservations
         /// </summary>
         /// <returns>All the Reservations for the hotel</returns>
-        public IEnumerable<Reservation> GetReservationsForUser()
+        public IEnumerable<Reservation> GetAllReservations()
         {
             return _reservationBook.GetAllReservations();
         }
